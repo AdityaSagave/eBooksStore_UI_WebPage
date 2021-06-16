@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<title>eBookCorner</title>
+	<!-- CSS CDN -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+	<!-- CSS file -->
+	<!-- <link rel="stylesheet" type="text/css" href="/public/css/styles.css"> -->
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Roboto:wght@300&family=Satisfy&display=swap" rel="stylesheet">
+
+	<!-- Vue.js CDN -->
+	<script src="https://unpkg.com/vue@next"></script>
+
+	
+	<style>
+		
+		:root{
+			--bg-color: #dee6e0;
+			--nav-bg-color: #a7d7c5;
+			--conatianer-bg-color: #74b49b;
+			--text-color-black: #363636;
+			--text-color-white: whitesmoke;
+			--icon-color: #4c4c4c;
+			--main-heading-font: 'Satisfy', cursive;
+			--sub-heading-font:'Comfortaa', cursive;
+			--small-fonts: 'Roboto', sans-serif;
+		}
+
+		[data-theme = "dark"] {
+			--bg-color: #222831;
+			--text-color-black: #dfdfdf;
+			--icon-color: #e3e3e3;
+			--nav-bg-color: #5e8b7e;
+			--conatianer-bg-color: #415b50;
+			
+		}
+		html {
+			scroll-behavior: smooth;
+			font-family: 'Roboto',sans-serif;
+		}
+
+		body {
+			scroll-behavior: smooth;
+			margin-bottom: 425.6px;
+			z-index: 1;
+			color: var(--text-color-black);
+		}
+
+		h1 strong, h3, h3 strong, h2 strong{
+			font-family: var(--sub-heading-font);
+		}
+
+		p{
+			font-weight: 600;
+			font-family: var(--small-fonts);
+		}
+
+		li{
+			font-family: var(--small-fonts);
+			color: var(--text-color-black);
+		}
+
+		.bodyclass {
+			background-color: var(--bg-color);
+			z-index: 5;
+			box-shadow: 0px 5px 15px 0px rgba(255, 254, 254, 0.326);
+		}
+
+		.navbar {
+			padding: 50px;
+			background-color: var(--nav-bg-color);
+		}
+
+		.navbar-brand {
+			font-size: 60px; 
+			font-family: var(--main-heading-font); 
+			color: var(--icon-color);
+		}
+
+		.navbar-light .navbar-brand:hover{
+			color: var(--icon-color);
+		}
+		.navbar-light .navbar-brand{
+			color: var(--icon-color);
+		}
+
+		.dropdown-item {
+			padding: 10px 15px;
+			margin: 0 10px;
+			color: var(--text-color-black);
+		}
+
+		.nav-item {
+			padding: 0 10px;
+			font-size: 20px;
+			text-align: center;
+		}
+
+		.about_li,
+		.support_li {
+			right: 50px;
+			text-align: center;
+			align-items: center;
+		}
+
+		#about_items,
+		#support_items {
+			padding-left: 25%;
+			text-align: center;
+			align-items: center;
+		}
+
+		.addr,
+		.visit {
+			border-style: none none none dashed;
+			border-color: var(--text-color-black);
+			border-width: 0.1em;
+		}
+
+		.addr li {
+			padding: 3px 0;
+			margin: 3px 0;
+			align-self: center;
+		}
+
+		.visit li {
+			padding: 3px 0;
+			margin: 3px 0;
+		}
+
+		#signup_btn {
+			margin-top: 20px;
+			width: 90%;
+		}
+
+		#signin {
+			width: 70%;
+		}
+
+		.dropdown_heading {
+			padding: 40px 0 20px 0;
+			margin: 0 0 20px 90px;
+			font-family: var(--sub-heading-font);
+		}
+
+		.dropdownbutton:hover .dropdown-menu {
+			display: block;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			width: fit-content;
+			height: fit-content;
+			animation: scaleDown 500ms ease-in-out forwards;
+			transform-origin: top center;
+			background-color: var(--conatianer-bg-color);
+			color: var(--text-color-black);
+		}
+
+		@keyframes scaleDown {
+			0% {
+				transform: scaleY(0);
+			}
+
+			100% {
+				opacity: 1;
+				transform: scaleY(1);
+			}
+		}
+
+		.dropdownbutton:hover .dropdown-item {
+			width: fit-content;
+			height: fit-content;
+			animation: translatex 2s ease-in-out forwards;
+			transform-origin: top center;
+		}
+
+		@keyframes translatex {
+			0% {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateY(0px);
+			}
+		}
+
+		.dropdown-item:hover {
+			background-color: #afc4bc;
+			cursor: pointer;
+		}
+
+		.subhead{
+			color: var(--text-color-black);
+		}
+
+		.subhead:hover {
+			background-color: transparent;
+			color: var(--text-color-black);
+		}
+
+		.booksdropdown {
+			width: max-content;
+		}
+
+		.col {
+			width: max-content;
+			margin: 0 100px 20px 100px;
+			padding: 20px 10px;
+		}
+
+		#second_col,
+		#first_col {
+			margin-left: 20px;
+			border-style: none none none dashed;
+			border-color: var(--text-color-black);
+			border-width: 0.1em;
+		}
+
+		#first_col {
+			margin-left: 90px;
+		}
+
+
+		.slidingOuterCon {
+			width: 100%;
+			height: 480px;
+			overflow: hidden;
+			margin: 100px 0 auto;
+			display: flex;
+			background-color: var(--conatianer-bg-color);
+		}
+
+		.slidingBackground {
+			display: flex;
+			position: relative;
+			padding-left: 100px;
+			width: 300%;
+			height: 450px;
+			animation: slide 100s linear infinite;
+			justify-content: space-around;
+			justify-items: baseline;
+		}
+
+		@keyframes slide {
+			0% {
+				transform: translateX(0%);
+			}
+
+			50% {
+				transform: translateX(-70%);
+			}
+
+			100% {
+				transform: translateX(0%);
+			}
+		}
+
+		.slidingBackground:hover {
+			animation-play-state: paused;
+
+		}
+
+		.darktheme{
+			display: flex;
+			justify-content:left;
+			align-items: center;
+			margin: 10px 0 0 0;
+		}
+
+		.toggle-button{
+			-webkit-appearance: none;
+			outline: none;
+			width: 50px;
+			height: 30px;
+			background-color: #212121;
+			border-radius: 50px;
+			position: relative;
+			transition: .4s ease-in-out;
+		}
+
+		.toggle-button:checked{
+			background-color: #bdbdbd;
+		}
+
+		.toggle-button:checked:before{
+			transform: translate(100%);
+			background-color: #212121;
+			transition: .4s ease-in-out;
+		}
+
+		.topsells {
+			position: relative;
+			top: 70px;
+			display: flex;
+			justify-content: center;
+		}
+
+		.topbooks,
+		.popbooks {
+			justify-content: space-around;
+		}
+
+		#topbooks_img,
+		#popbooks_img {
+			margin: 30px;
+			padding: 30px;
+			background-size: cover;
+			width: 450px;
+			height: 333px;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.10);
+		}
+
+		.topbooks_name,
+		.popbooks_name {
+			margin-left: 30px;
+			width: 450px;
+			height: 170px;
+			padding: 10px;
+			text-align: center;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.10);
+		}
+
+		.books_description,
+		.description_photosList {
+			margin: 70px 0 0 0;
+			padding: 0;
+			width: 40%;
+			height: 800px;
+		}
+
+		.description_photosList {
+			width: 60%;
+		}
+
+		.description_text h1 {
+			padding: 0 0 10px 60px;
+			font-size: 70px;
+			border-style: none none dashed none;
+			border-color: rgb(70, 70, 70);
+			border-width: 0.03em;
+		}
+
+		.description_text p {
+			padding: 70px 40px 0 60px;
+			font-size: 30px;
+			letter-spacing: 2.5px;
+		}
+
+		.description_img {
+			background-size: cover;
+			padding-left: 20px;
+			width: 911px;
+		}
+
+		.description_photosList {
+			overflow: hidden;
+		}
+
+		.buybuttons {
+			padding: 50px 0 0 60px;
+		}
+
+		.buybutton {
+			padding: 10px 40px;
+			margin-right: 30px;
+		}
+
+		.popular_container {
+			padding: 30px 0 50px 0;
+		}
+
+		.popular_container h1 {
+			padding: 80px 0 30px 0;
+			text-align: center;
+			font-size: 60px;
+		}
+
+		#popular_outer {
+			margin-top: 0;
+			padding-bottom: 100px;
+			height: 600px;
+		}
+
+		#popbooks {
+			background-color: var(--text-color-black);
+		}
+
+		.whatsNew_row {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 3000px;
+		}
+
+		.whatsNew_col1 {
+			padding: 0;
+			margin: 0;
+		}
+
+		.whatsNew_col2 {
+			padding: 0;
+			margin: 0;
+		}
+
+		.whatsNew_col2_img {
+			width: 633px;
+			height: 800px;
+			align-items: center;
+			position: sticky;
+			top: 0;
+			background-image: url("https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Ym9va3N8ZW58MHwxfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+			background-size: cover;
+		}
+
+		.whatsNew_col2_img:hover {
+			animation: bgscaleup 8s infinite;
+		}
+
+		.whatsNew_col2_text {
+			position: sticky;
+			top: 500px;
+			padding: 10px 0 10px 100px;
+			background-color: rgba(255, 237, 237, 0.322);
+			backdrop-filter: blur(6px);
+		}
+
+		.whatsNew_col1_books {
+			padding: 0 70px 200px 70px;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+		}
+
+		.subscribe {
+			margin-top: 254px;
+			padding-top: 50px;
+			background-color: var(--nav-bg-color);
+			text-align: center;
+			align-items: center;
+		}
+
+		.subscribe h1 {
+			font-size: 50px;
+			letter-spacing: 3px;
+			padding-bottom: 20px;
+		}
+
+		.subscribe p {
+			font-size: 17px;
+			padding-bottom: 10px;
+		}
+
+		.subscribe input {
+			width: 500px;
+			border-radius: 0;
+		}
+
+		.subscribe button {
+			border-radius: 0;
+			font-size: 20px;
+		}
+
+		.subscribe .input {
+			display: flex;
+			flex-direction: row;
+			margin-left: 450px;
+			padding: 20px;
+		}
+
+		.lovebookstore {
+			padding-top: 50px;
+			text-align: center;
+		}
+
+		.lovebookstore .row {
+			padding: 100px 0 50px 0;
+			text-align: center;
+			margin: 0;
+		}
+
+		footer {
+			position: fixed;
+			bottom: 0;
+			z-index: -1;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			text-align: center;
+			align-items: center;
+			color: var(--text-color-white);
+			background-image: url("https://images.unsplash.com/photo-1506606401543-2e73709cebb4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmV3JTIweW9yayUyMG5pZ2h0fGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80");
+			background-size: cover;
+			background-position: center;
+		}
+
+		footer .row .col {
+			margin: 0 20px;
+		}
+
+		footer .row{
+			backdrop-filter: blur(6px);
+		}
+
+		footer a {
+			font-size: 18px;
+			font-weight: 300;
+			color: var(--text-color-white);
+			padding: 10px 20px;
+		}
+
+		footer h4 {
+			padding: 60px 0;
+		}
+
+		footer h1 {
+			padding: 20px 0 100px 0;
+		}
+
+		footer:hover {
+			animation: bgscaleup 8s infinite;
+		}
+
+		@keyframes bgscaleup {
+			0% {
+				background-size: 100%;
+			}
+
+			50% {
+				background-size: 150%;
+			}
+
+			100% {
+				background-size: 100%;
+			}
+		}
+
+
+		.fab {
+			padding: 0 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="bodyclass">
+
+		<div class="header">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container-fluid">
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2">
+							<li class="nav-item dropdownbutton">
+								<a href="#" class="nav-link dropdown-toggle" role="button" aria-expanded="false"
+									id="dropdownmenu">Books</a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownmenu">
+									<div class="container">
+										<h1 class="dropdown_heading dropdown-item subhead">BOOKS</h1>
+										<div class="row booksdropdown row-cols-md-auto row-cols-sm-auto">
+											<div class="col" id="first_col">
+												<li class="dropdown-item">New books</li>
+												<li class="dropdown-item">Bestsellers</li>
+												<li class="dropdown-item">Coming soon</li>
+												<li class="dropdown-item">Photography books</li>
+												<li class="dropdown-item">Fashion books</li>
+												<li class="dropdown-item">Culinary books</li>
+												<li class="dropdown-item">Interior & Architecture</li>
+												<li class="dropdown-item">Art & Graphics design</li>
+												<li class="dropdown-item">Lifestyle books</li>
+											</div>
+											<div class="col" id="second_col">
+												<li class="dropdown-item">Traveling</li>
+												<li class="dropdown-item">Limited editions</li>
+												<li class="dropdown-item">Friends with brands</li>
+												<li class="dropdown-item">Staff pick</li>
+												<li class="dropdown-item">Bookstand</li>
+												<li class="dropdown-item">Giftcards</li>
+											</div>
+										</div>
+									</div>
+								</ul>
+							</li>
+							<li class="nav-item dropdownbutton">
+								<a href="#" class="nav-link dropdown-toggle" role="button" aria-expanded="false"
+									id="dropdownmenu">Best Sellers <span class="sr-only"> (HOT)</span></a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownmenu">
+									<div class="container">
+										<h1 class="dropdown_heading dropdown-item subhead">Best Sellers</h1>
+										<div class="row row-cols-md-auto row-cols-sm-auto">
+											<div class="col " id="first_col">
+												<li class="dropdown-item">New books</li>
+												<li class="dropdown-item">Bestsellers</li>
+												<li class="dropdown-item">Coming soon</li>
+												<li class="dropdown-item">Photography books</li>
+												<li class="dropdown-item">Fashion books</li>
+												<li class="dropdown-item">Culinary books</li>
+												<li class="dropdown-item">Interior & Architecture</li>
+												<li class="dropdown-item">Art & Graphics design</li>
+												<li class="dropdown-item">Lifestyle books</li>
+											</div>
+										</div>
+									</div>
+								</ul>
+							</li>
+							<li class="nav-item dropdownbutton">
+								<a href="#" class="nav-link dropdown-toggle" role="button" aria-expanded="false"
+									id="dropdownmenu">Journals</a>
+								<ul class="dropdown-menu" aria-labelledby="dropdownmenu">
+									<div class="container">
+										<h1 class="dropdown_heading dropdown-item subhead">Journals</h1>
+										<div class="row row-cols-md-auto row-cols-sm-auto">
+											<div class="col " id="first_col">
+												<li class="dropdown-item">New books</li>
+												<li class="dropdown-item">Bestsellers</li>
+												<li class="dropdown-item">Coming soon</li>
+												<li class="dropdown-item">Photography books</li>
+												<li class="dropdown-item">Fashion books</li>
+												<li class="dropdown-item">Culinary books</li>
+												<li class="dropdown-item">Interior & Architecture</li>
+												<li class="dropdown-item">Art & Graphics design</li>
+												<li class="dropdown-item">Lifestyle books</li>
+											</div>
+										</div>
+									</div>
+								</ul>
+
+							</li>
+						</ul>
+					</div>
+
+					<a href="#" class="navbar-brand" id="brand">BooksCorner</a>
+
+					<button class=" btn btn-outline-dark navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ms-auto mb-6">
+							<li class="nav-item dropdownbutton">
+								<a href="#" class="nav-link">About</a>
+								<ul class="dropdown-menu about_li">
+									<div class="container">
+										<div class="row">
+											<div class="col" id="about_items">
+												<li class="dropdown-item subhead"><strong>ABOUT</strong></li>
+												<li class="dropdown-item">BooksCorner Flagship Store</li>
+												<li class="dropdown-item">Our Philosophy</li>
+												<li class="dropdown-item">Made by BooksCorner</li>
+												<li class="dropdown-item">Gift Service</li>
+												<li class="dropdown-item">Press</li>
+												<li class="dropdown-item">Our Staff</li>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col addr">
+												<li class="dropdown-item subhead"><strong>Contact</strong></li>
+												<li class="dropdown-item subhead">020 8888 0404</li>
+												<li class="dropdown-item subhead">service@gmail.com</li>
+												<li class="dropdown-item subhead">Chat with us</li>
+											</div>
+											<div class="col visit">
+												<li class="dropdown-item subhead"><strong>Visit us</strong></li>
+												<li class="dropdown-item subhead">BooksCorner</li>
+												<li class="dropdown-item subhead">Pimpri, Pune</li>
+												<li class="dropdown-item subhead">Maharashtra.</li>
+											</div>
+										</div>
+									</div>
+								</ul>
+							</li>
+							<li class="nav-item dropdownbutton">
+								<a href="#" class="nav-link">Support</a>
+								<ul class="dropdown-menu support_li">
+									<div class="container">
+										<div class="row">
+											<div class="col" id="support_items">
+												<li class="dropdown-item subhead"><strong>SUPPORT</strong></li>
+												<li class="dropdown-item">Account</li>
+												<li class="dropdown-item">Contact</li>
+												<li class="dropdown-item">FAQ</li>
+												<li class="dropdown-item">My order</li>
+												<li class="dropdown-item">Payment options</li>
+												<li class="dropdown-item">The Team</li>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col addr">
+												<li class="dropdown-item subhead"><strong>Contact</strong></li>
+												<li class="dropdown-item subhead">020 8888 0404</li>
+												<li class="dropdown-item subhead">service@gmail.com</li>
+												<li class="dropdown-item subhead">Chat with us</li>
+											</div>
+											<div class="col visit">
+												<li class="dropdown-item subhead"><strong>Visit us</strong></li>
+												<li class="dropdown-item subhead">BooksCorner</li>
+												<li class="dropdown-item subhead">Pimpri, Pune</li>
+												<li class="dropdown-item subhead">Maharashtra.</li>
+											</div>
+										</div>
+									</div>
+								</ul>
+							</li>
+							<li class="nav-item dropdownbutton">
+								<a href="#" class="nav-link">Account</a>
+								<ul class="dropdown-menu support_li">
+									<div class="container">
+										<div class="row row-cols-md-auto row-cols-sm-auto">
+											<div class="col">
+												<li class="dropdown-item subhead">
+												<li><strong>Account</strong></li>
+							</li>
+
+							<div class="signin-form">
+
+								<form method="POST" action="/signup" class="register-form" id="login-form">
+
+									<li class="dropdown-item subhead">
+										<label for="exampleInputPassword1 subhead">Username</label>
+										<div class="-group subhead">
+											<div class="form-group">
+												<label for="email"><i class="zmdi zmdi-email"></i></label>
+												<input type="email" name="emailaccess" id="email"
+													placeholder="Your Email" autocomplete="off"
+													class="form-control subhead" required />
+											</div>
+										</div>
+									</li>
+
+									<li class="dropdown-item subhead">
+										<label for="exampleInputPassword1 subhead">Password</label>
+										<div class="form-group">
+											<label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+											<input type="password" name="passwordaccess" id="your_pass"
+												placeholder="Password" class="form-control subhead" required />
+										</div>
+									</li>
+
+									<li class="dropdown-item subhead">
+										<div class="form-group">
+											<input type="checkbox" name="remember-me" id="remember-me"
+												class="agree-term" />
+											<label for="remember-me"
+												class="label-agree-term"><span><span></span></span>Remember me</label>
+										</div>
+									</li>
+									<li>
+									<li class="dropdown-item subhead"><em>I forgot my Password</em></li>
+									</li>
+									<li class="dropdown-item subhead">
+									<li>
+										<div class="form-group form-button">
+											<input type="submit" name="signin" id="signin"
+												class="btn btn-dark btn-lg subhead" value="Log in" />
+										</div>
+									</li>
+								</form>
+								<a href="./signup.html" id="signup_btn" class="btn btn-dark btn-lg subhead">Sign Up</a>
+
+							</div>
+					</div>
+				</div>
+				</ul>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">Cart</a>
+				</li>
+				</ul>
+		</div>
+	</div>
+	</nav>
+</div>
+<div class="container darktheme">
+	<h3 style="margin-right: 20px;">Light</h3>
+	<input type="checkbox" class= "toggle-button">
+	<h3 style="margin-left: 20px;">Dark</h3>
+</div>
+	<div class="topsells">
+		<h1><strong>Our top picks this month!</strong></h1>
+	</div>
+
+	<div class="slidingOuterCon">
+		<div class="slidingBackground">
+			<div class="topbooks">
+				<a href="#">
+					<img id="topbooks_img"
+						src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym9va3N8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+						alt="book2">
+				</a>
+				<h3 class="topbooks_name">Chris Lawton</h3>
+			</div>
+			<div class="topbooks">
+				<a href="#">
+					<img id="topbooks_img"
+						src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ym9va3N8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+						alt="book1">
+				</a>
+				<h3 class="topbooks_name">Alona Po</h3>
+			</div>
+			<div class="topbooks">
+				<a href="#">
+					<img id="topbooks_img"
+						src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Ym9va3N8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+						alt="book3">
+				</a>
+				<h3 class="topbooks_name">Daria Nepriakhina</h3>
+			</div>
+			<div class="topbooks">
+				<a href="#">
+					<img id="topbooks_img"
+						src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8Ym9va3N8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+						alt="book4">
+				</a>
+				<h3 class="topbooks_name">Ertiga Sela</h3>
+			</div>
+			<div class="topbooks">
+				<a href="#">
+					<img id="topbooks_img"
+						src="https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+						alt="book5">
+				</a>
+				<h3 class="topbooks_name">Freddie Lawton</h3>
+			</div>
+			<div class="topbooks">
+				<a href="#">
+					<img id="topbooks_img"
+						src="https://images.unsplash.com/photo-1561657819-51c0511e35ab?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+						alt="book5">
+				</a>
+				<h3 class="topbooks_name">Joanna Kosinska</h3>
+			</div>
+			<div class="topbooks">
+				<a href="#">
+					<img id="topbooks_img"
+						src="https://images.unsplash.com/photo-1579288954684-d8cca5ec1223?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGJvb2tzfGVufDB8MnwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+						alt="book5">
+				</a>
+				<h3 class="topbooks_name">Nathan Dumlao</h3>
+			</div>
+			<div class="topbooks">
+				<a href="#">
+					<img id="topbooks_img"
+						src="https://images.unsplash.com/photo-1476275466078-4007374efbbe?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+						alt="book5">
+				</a>
+				<h3 class="topbooks_name">Thought Catalog</h3>
+			</div>
+			<div class="topbooks">
+				<a href="#">
+					<img id="topbooks_img"
+						src="https://images.unsplash.com/photo-1498906538030-8da82e61e424?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+						alt="book5">
+				</a>
+				<h3 class="topbooks_name">Tom Hermans</h3>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row row-cols-md-auto row-cols-sm-auto">
+			<div class="col-4 books_description carousel slide" data-bs-ride="carousel" id="carouselExampleSlidesOnly">
+				<div class="carousel-inner books_des_sliding">
+					<div class="carousel-item active description_text">
+						<h1><strong>Alona Po</strong></h1>
+						<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.
+							It
+							is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+						<div class="buybuttons">
+							<button type="button" class="buybutton btn btn-success btn-lg"> $75</button>
+							<button type="button" class="buybutton btn btn-success btn-lg">Buy/Order</button>
+						</div>
+					</div>
+					<div class="carousel-item description_text">
+						<h1><strong>Chris Lawton</strong></h1>
+						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost
+							unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
+							decided to leave for the far World of Grammar</p>
+						<div class="buybuttons">
+							<button type="button" class="buybutton btn btn-success btn-lg"> $35</button>
+							<button type="button" class="buybutton btn btn-success btn-lg">Buy/Order</button>
+						</div>
+					</div>
+					<div class="carousel-item description_text">
+						<h1><strong>Daria Nepriakhina</strong></h1>
+						<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild
+							Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.</p>
+						<div class="buybuttons">
+							<button type="button" class="buybutton btn btn-success btn-lg"> $80</button>
+							<button type="button" class="buybutton btn btn-success btn-lg">Buy/Order</button>
+						</div>
+					</div>
+					<div class="carousel-item description_text">
+						<h1><strong>Ergita Sela</strong></h1>
+						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+							there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
+							Semantics, a large language ocean.</p>
+						<div class="buybuttons">
+							<button type="button" class="buybutton btn btn-success btn-lg"> $25</button>
+							<button type="button" class="buybutton btn btn-success btn-lg">Buy/Order</button>
+						</div>
+					</div>
+					<div class="carousel-item description_text">
+						<h1><strong>Freddie Konsinska</strong></h1>
+						<p>She packed her seven versalia, put her initial into the belt and made herself on the way.
+							When she reached the first hills of the Italic Mountains, she had a last view back on the
+							skyline of her hometown.</p>
+						<div class="buybuttons">
+							<button type="button" class="buybutton btn btn-success btn-lg"> $70</button>
+							<button type="button" class="buybutton btn btn-success btn-lg">Buy/Order</button>
+						</div>
+					</div>
+					<div class="carousel-item description_text">
+						<h1><strong>Joanna Lawton</strong></h1>
+						<p>The copy warned the Little Blind Text, that where it came from it would have been rewritten a
+							thousand times and everything that was left from its origin would be the word "and" and the
+							Little Blind Text should turn around and return to its own, safe country.</p>
+						<div class="buybuttons">
+							<button type="button" class="buybutton btn btn-success btn-lg"> $65</button>
+							<button type="button" class="buybutton btn btn-success btn-lg">Buy/Order</button>
+						</div>
+					</div>
+					<div class="carousel-item description_text">
+						<h1><strong>Nathan Dumlao</strong></h1>
+						<p> A small river named Duden flows by their place and supplies it with the necessary
+							regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your
+							mouth.</p>
+						<div class="buybuttons">
+							<button type="button" class="buybutton btn btn-success btn-lg"> $95</button>
+							<button type="button" class="buybutton btn btn-success btn-lg">Buy/Order</button>
+						</div>
+					</div>
+					<div class="carousel-item description_text">
+						<h1><strong>Thought Catalog</strong></h1>
+						<p> But nothing the copy said could convince her and so it didn’t take long until a few
+							insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her
+							into their agency, where they abused her for their projects again and again.</p>
+						<div class="buybuttons">
+							<button type="button" class="buybutton btn btn-success btn-lg"> $205</button>
+							<button type="button" class="buybutton btn btn-success btn-lg">Buy/Order</button>
+						</div>
+					</div>
+					<div class="carousel-item description_text">
+						<h1><strong>Tom Hermans</strong></h1>
+						<p>And if she hasn’t been rewritten, then they are still using her. Far far away, behind the
+							word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
+						</p>
+						<div class="buybuttons">
+							<button type="button" class="buybutton btn btn-success btn-lg"> $50</button>
+							<button type="button" class="buybutton btn btn-success btn-lg">Buy/Order</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-8 description_photosList carousel slide" data-bs-ride="carousel"
+				id="carouselExampleSlidesOnly">
+				<div class="carousel-inner descreption_photos">
+					<div class="carousel-item active">
+						<a href="#">
+							<img class="description_img"
+								src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym9va3N8ZW58MHwxfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+								alt="">
+						</a>
+					</div>
+					<div class="carousel-item">
+						<a href="#">
+							<img class="description_img"
+								src="https://images.unsplash.com/photo-1509266272358-7701da638078?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ym9va3N8ZW58MHwxfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+								alt="">
+						</a>
+					</div>
+					<div class="carousel-item">
+						<a href="#">
+							<img class="description_img"
+								src="https://images.unsplash.com/photo-1529590003495-b2646e2718bf?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzB8fGJvb2tzfGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+								alt="">
+						</a>
+					</div>
+					<div class="carousel-item">
+						<a href="#">
+							<img class="description_img"
+								src="https://images.unsplash.com/photo-1556566952-11eff3d06ed4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fGJvb2tzfGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+								alt="">
+						</a>
+					</div>
+					<div class="carousel-item">
+						<a href="#">
+							<img class="description_img"
+								src="https://images.unsplash.com/photo-1496104679561-38d3af73f9b0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGJvb2tzfGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+								alt="">
+						</a>
+					</div>
+					<div class="carousel-item">
+						<a href="#">
+							<img class="description_img"
+								src="https://images.unsplash.com/photo-1508107506371-193d6e71444c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJvb2tzfGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+								alt="">
+						</a>
+					</div>
+					<div class="carousel-item">
+						<a href="#">
+							<img class="description_img"
+								src="https://images.unsplash.com/photo-1568034608313-2fa7c3d7bd3b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzV8fGJvb2tzfGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+								alt="">
+						</a>
+					</div>
+					<div class="carousel-item">
+						<a href="#">
+							<img class="description_img"
+								src="https://images.unsplash.com/photo-1508107506371-193d6e71444c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGJvb2tzfGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+								alt="">
+						</a>
+					</div>
+					<div class="carousel-item">
+						<a href="#">
+							<img class="description_img"
+								src="https://images.unsplash.com/photo-1550399105-05c4a7641b02?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGJvb2tzfGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+								alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid popular_container">
+		<h1><strong>New and Popular</strong></h1>
+		<div class="slidingOuterCon" id="popular_outer">
+			<div class="slidingBackground popular_inner">
+				<div class="popbooks">
+					<a href="#">
+						<img id="popbooks_img"
+							src="https://images.unsplash.com/photo-1515125520141-3e3b67bc0a88?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDh8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+							alt="book5">
+					</a>
+					<div class="popbooks_name">
+						<h3>Joanna Kosinska</h3>
+						<hr>
+						<p> But nothing the copy said could convince her and so it didn’t take long until a few
+							insidious Copy Writers.</p>
+					</div>
+				</div>
+				<div class="popbooks">
+					<a href="#">
+						<img id="popbooks_img"
+							src="https://images.unsplash.com/photo-1536237880829-dd441c249e0d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTN8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+							alt="book5">
+					</a>
+					<div class="popbooks_name">
+						<h3>Alona Po</h3>
+						<hr>
+						<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.
+							It
+							is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+					</div>
+				</div>
+				<div class="popbooks">
+					<a href="#">
+						<img id="popbooks_img"
+							src="https://images.unsplash.com/photo-1517221514-0fc402968cb1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTl8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+							alt="book5">
+					</a>
+					<div class="popbooks_name">
+						<h3>Chris Lawton</h3>
+						<hr>
+						<p> Even the all-powerful Pointing has no control about the blind texts it is an almost
+							unorthographic life One day.</p>
+					</div>
+				</div>
+				<div class="popbooks">
+					<a href="#">
+						<img id="popbooks_img"
+							src="https://images.unsplash.com/photo-1522742943744-b3cd4e6f98e1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTd8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+							alt="book5">
+					</a>
+					<div class="popbooks_name">
+						<h3>Daria Nepriakhina</h3>
+						<hr>
+						<p> The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild
+							Question Marks and devious Semikoli.</p>
+					</div>
+				</div>
+				<div class="popbooks">
+					<a href="#">
+						<img id="popbooks_img"
+							src="https://images.unsplash.com/photo-1608726025971-d7e9df684498?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njh8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+							alt="book5">
+					</a>
+					<div class="popbooks_name">
+						<h3>Ergita Sela</h3>
+						<hr>
+						<p> Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+							there live the blind texts.</p>
+					</div>
+				</div>
+				<div class="popbooks">
+					<a href="#">
+						<img id="popbooks_img"
+							src="https://images.unsplash.com/photo-1474932430478-367dbb6832c1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTh8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+							alt="book5">
+					</a>
+					<div class="popbooks_name">
+						<h3>Freddie Konsinska</h3>
+						<hr>
+						<p>The copy warned the Little Blind Text, that where it came from it would have been rewritten a
+							thousand times and everything that was left.</p>
+					</div>
+				</div>
+				<div class="popbooks">
+					<a href="#">
+						<img id="popbooks_img"
+							src="https://images.unsplash.com/photo-1596402234200-650fd07ccf73?ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODF8fGJvb2tzfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+							alt="book5">
+					</a>
+					<div class="popbooks_name">
+						<h3>Nathan Dumlao</h3>
+						<hr>
+						<p> A small river named Duden flows by their place and supplies it with the necessary
+							regelialia.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="whatsNew">
+		<div class="row whatsNew_row">
+			<div class="col-7 whatsNew_col1">
+				<div class="row">
+					<div class="col-6 whatsNew_col1_books">
+						<img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ym9va3N8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+							alt="">
+						<h2><strong>Rizzoli announces<br>new Tom Ford book</strong></h2>
+						<p><strong>--Tom Ford 002</strong></p>
+						<p>American designer Tom Ford's highly anticipated second book: Tom Ford 002 is expected to be
+							published in October this year. Register now to reserve your copy.</p>
+						<p><strong>MAY 2021</strong></p>
+					</div>
+					<div class="col-6 whatsNew_col1_books">
+						<img src="https://images.unsplash.com/photo-1578349750407-20d97c47d702?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfDJ8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+							alt="">
+						<h2><strong>Aesthetically pleasing
+								books</strong></h2>
+						<p><strong>-----</strong></p>
+						<p>
+							Covering the genres of photography, fashion, architecture, interior design and culinary
+							arts, this range of popular books at MENDO bring aesthetic inspiration to a whole new level.
+						</p>
+						<p><strong>MAY 2021</strong></p>
+					</div>
+					<div class="col-6 whatsNew_col1_books">
+						<img src="https://images.unsplash.com/photo-1563432057907-b6c11bf80702?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Ym9va3xlbnwwfDJ8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+							alt="">
+						<h2><strong>The -isms series</strong></h2>
+						<p><strong>-----</strong></p>
+						<p>The ISMs series distills the voices of an exciting range of visual artists and designers into
+							captivating, beautifully-made books of quotations for a new generation of readers.</p>
+						<p><strong>MAY 2021</strong></p>
+					</div>
+					<div class="col-6 whatsNew_col1_books">
+						<img src="https://images.unsplash.com/photo-1587834116357-534be6ec1e8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8Ym9va3xlbnwwfDJ8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+							alt="">
+						<h2><strong>A designer’s haven</strong></h2>
+						<p><strong>-----</strong></p>
+						<p>A curated collection that covers all things graphic design, featuring logo design, business
+							planning and typographical inspiration all the way to the medium's impact on politics.</p>
+						<p><strong>MAY 2021</strong></p>
+					</div>
+					<div class="col-6 whatsNew_col1_books">
+						<img src="https://images.unsplash.com/photo-1556970255-32d2cec67cbc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGJvb2t8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+							alt="">
+						<h2><strong>Visual inspiration #10</strong></h2>
+						<p><strong>-----</strong></p>
+						<p>At MENDO, we love to be inspired by everything visual. The images in this edition of visual
+							inspiration were selected by Troy Martin, photographer and designer at MENDO.</p>
+						<p><strong>MAY 2021</strong></p>
+					</div>
+					<div class="col-6 whatsNew_col1_books">
+						<img src="https://images.unsplash.com/photo-1575488405241-def30132aab6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGJvb2t8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+							alt="">
+						<h2><strong>What to treat yourself
+								with</strong></h2>
+						<p><strong>-----</strong></p>
+						<p>What are you going to treat yourself with? We have compiled a list of suggestions: a mixture
+							of new books, classics and restocked bestsellers.</p>
+						<p><strong>MAY 2021</strong></p>
+					</div>
+					<div class="col-6 whatsNew_col1_books">
+						<img src="https://images.unsplash.com/photo-1573500196407-ddc4f7560e38?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzV8fGJvb2t8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+							alt="">
+						<h2><strong>Rizzoli announces<br>new Tom Ford book</strong></h2>
+						<p><strong>-----</strong></p>
+						<p>American designer Tom Ford's highly anticipated second book: Tom Ford 002 is expected to be
+							published in October this year. Register now to reserve your copy.</p>
+						<p><strong>MAY 2021</strong></p>
+					</div>
+					<div class="col-6 whatsNew_col1_books">
+						<img src="https://images.unsplash.com/photo-1604809026742-19257cee808d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjV8fGJvb2t8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+							alt="">
+						<h2><strong>Rizzoli announces<br>new Tom Ford book</strong></h2>
+						<p><strong>-----</strong></p>
+						<p>American designer Tom Ford's highly anticipated second book: Tom Ford 002 is expected to be
+							published in October this year. Register now to reserve your copy.</p>
+						<p><strong>MAY 2021</strong></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-5 whatsNew_col2">
+				<div class="whatsNew_col2_img">
+				</div>
+				<div class="whatsNew_col2_text">
+					<h1><strong>Joep Hijwegen<br>exhibition at MENDO</strong></h1>
+					<h3>--Expo</h3>
+					<p>A selection of Joep Hijwegen’s work will be exhibited at MENDO from Wednesday the 19th of May.
+					</p>
+					<p><strong>May 2021</strong></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="subscribe">
+		<h1><strong>Join the inner circle</strong></h1>
+		<p>Stay updated with the latest news, stories and discounts</p>
+		<div class="input">
+			<input type="text" class="form-control" placeholder="E-mail address">
+			<button class="btn btn-outline-dark" type="button">Subscribe</button>
+		</div>
+	</div>
+
+	<div class="lovebookstore">
+		<h1><strong>Why people love BooksCorner</strong></h1>
+		<div class="row">
+			<div class="col-3"><i style="color: var(--icon-color);" class="fas fa-book fa-3x"></i>
+				<h5>We are book curators</h5>
+			</div>
+			<div class="col-3"><i style="color: var(--icon-color);" class="fas fa-gift fa-3x"></i>
+				<h5>We gift-wrap every book</h5>
+			</div>
+			<div class="col-3"><i style="color: var(--icon-color);" class="fas fa-hand-holding-heart fa-3x"></i>
+				<h5>We offer personal service</h5>
+			</div>
+			<div class="col-3"><i style="color: var(--icon-color);" class="fas fa-shipping-fast fa-3x"></i>
+				<h5>Free shipping in NL over € 60</h5>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- font awsome cdn -->
+	<script src="https://kit.fontawesome.com/f003dc4c3f.js" crossorigin="anonymous"></script>
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="./index.js"></script>
+	<script>
+		const toggleSwitch = document.querySelector('.toggle-button');
+
+function switchTheme(e) {
+	if (e.target.checked) {
+		document.documentElement.setAttribute('data-theme', 'dark');
+	} else {
+		document.documentElement.setAttribute('data-theme', 'light');
+	}
+
+}
+toggleSwitch.addEventListener('change', switchTheme, false);
+	</script>
+
+	</div>
+
+
+</body>
+
+<footer>
+	<div class="footerbg">
+		<h4>MENDO - Aesthetically pleasing books</h4>
+		<h1><strong>Pimpri Pune, Maharashtra</strong></h1>
+		<div class="row">
+			<div class="col">
+				<div class="footerbrands">
+					<i class="fab fa-instagram fa-2x"></i>
+					<i class="fab fa-facebook-square fa-2x"></i>
+					<i class="fab fa-twitter-square fa-2x"></i>
+					<i class="fab fa-pinterest-square fa-2x"></i>
+				</div>
+			</div>
+			<div class="col">
+				<div class="footerbrands">
+					<a href="#">Contact</a>
+					<a href="#">Instastore</a>
+					<a href="#">B2B Newsletter</a>
+					<a href="#">Terms</a>
+					<a href="#">Privacy</a>
+					<a href="#">Opening hours</a>
+					<a href="#">Press</a>
+				</div>
+			</div>
+			<div class="col">
+				<div class="footerbrands">
+					<i class="fab fa-cc-visa fa-2x"></i>
+					<i class="fab fa-cc-mastercard fa-2x"></i>
+					<i class="fab fa-cc-paypal fa-2x"></i>
+					<i class="fab fa-google-pay fa-2x"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+</html>
